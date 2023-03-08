@@ -1,0 +1,105 @@
+/*z1.1
+SELECT NAME
+FROM MOVIESTAR, STARSIN
+WHERE MOVIESTAR.GENDER='M' AND STARSIN.MOVIETITLE='The Usual Suspects' AND MOVIESTAR.NAME=STARSIN.STARNAME;
+*/
+
+/*z1.2
+SELECT STARSIN.STARNAME
+FROM MOVIE, STARSIN
+WHERE MOVIE.YEAR=1995 AND MOVIE.STUDIONAME='MGM' AND MOVIE.TITLE=STARSIN.MOVIETITLE;
+*/
+
+/*z1.3
+SELECT DISTINCT MOVIEEXEC.NAME
+FROM MOVIE, MOVIEEXEC
+WHERE MOVIE.STUDIONAME='MGM' AND MOVIE.PRODUCERC#=MOVIEEXEC.CERT#;
+*/
+
+/*z1.4
+SELECT m1.TITLE
+FROM MOVIE AS m1, MOVIE AS m2
+WHERE m1.LENGTH>m2.LENGTH AND m2.TITLE='Star Wars';
+*/
+
+/*z1.5
+SELECT m1.NAME
+FROM MOVIEEXEC AS m1, MOVIEEXEC AS m2
+WHERE m1.NETWORTH>m2.NETWORTH AND m2.NAME='Stephen Spielberg';
+*/
+
+/*z2.1
+SELECT distinct product.maker, laptop.speed
+FROM product, laptop
+WHERE laptop.hd>9 AND product.model=laptop.model
+*/
+
+/*z2.2
+SELECT DISTINCT  laptop.model, laptop.price
+FROM product, laptop
+WHERE product.maker='B' AND product.model=laptop.model
+UNION
+SELECT DISTINCT  pc.model, pc.price
+FROM product, pc
+WHERE product.maker='B' AND product.model=pc.model
+UNION
+SELECT DISTINCT  printer.model, printer.price
+FROM product, printer
+WHERE product.maker='B' AND product.model=printer.model
+*/
+
+/*z2.3
+SELECT DISTINCT  product.maker
+FROM product
+WHERE product.type='Laptop'
+EXCEPT
+SELECT distinct  product.maker
+FROM product
+WHERE product.type='PC'
+*/
+
+/*z2.4
+SELECT DISTINCT  pc1.hd
+FROM pc AS pc1, pc AS pc2
+WHERE pc1.code!=pc2.code AND pc1.hd=pc2.hd
+*/
+
+/*z2.5
+SELECT DISTINCT TOP 50 PERCENT  pc1.model, pc2.model
+FROM pc AS pc1, pc AS pc2
+WHERE pc1.model!=pc2.model AND pc1.ram=pc2.ram and pc1.speed=pc2.speed
+*/
+
+/*z2.6
+SELECT DISTINCT product.maker
+FROM product, pc AS pc1, pc AS pc2
+WHERE  product.type = 'PC' and pc1.speed>400 and pc2.speed>400 and pc1.code!=pc2.code and pc1.model=product.model and pc2.model=product.model
+*/
+
+/*z3.1
+SELECT SHIPS.NAME
+FROM CLASSES, SHIPS
+WHERE CLASSES.DISPLACEMENT>50000 and CLASSES.CLASS=SHIPS.CLASS
+*/
+
+/*z3.2
+SELECT SHIPS.NAME, CLASSES.DISPLACEMENT, CLASSES.NUMGUNS
+FROM CLASSES, SHIPS, OUTCOMES, BATTLES
+WHERE CLASSES.CLASS=SHIPS.CLASS and SHIPS.NAME=OUTCOMES.SHIP and OUTCOMES.BATTLE=BATTLES.NAME and BATTLES.NAME='Guadalcanal'
+*/
+
+/*z3.3
+SELECT CLASSES.COUNTRY
+FROM CLASSES
+WHERE CLASSES.TYPE='bb'
+INTERSECT
+SELECT CLASSES.COUNTRY
+FROM CLASSES
+WHERE CLASSES.TYPE='bc'
+*/
+
+/*z3.4
+SELECT distinct ship1.NAME
+FROM SHIPS as ship1, OUTCOMES as o1, BATTLES as b1, SHIPS as ship2, OUTCOMES as o2, BATTLES as b2
+WHERE ship1.NAME=o1.SHIP and b1.NAME=o1.BATTLE and o1.RESULT='damaged' and b1.DATE<b2.DATE and ship1.NAME=ship2.NAME and ship2.NAME=o2.SHIP and b2.NAME=o2.BATTLE
+*/
